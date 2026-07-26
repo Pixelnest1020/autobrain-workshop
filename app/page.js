@@ -855,7 +855,7 @@ const handleBookingSubmit = async (e) => {
 
             <div>
               <h4 className="font-bold text-white mb-3">Direct Contact</h4>
-              <p className="flex items-center gap-2 text-xs text-neutral-300 mb-2"><Phone size={14} className="text-blue-500" /> +1 (234) 567-890</p>
+              <p className="flex items-center gap-2 text-xs text-neutral-300 mb-2"><Phone size={14} className="text-blue-500" /> +91 8905602022</p>
               <p className="flex items-center gap-2 text-xs text-neutral-300"><MapPin size={14} className="text-red-500" /> AutoBrain Workshop, Adajan, Surat-Gujarat</p>
             </div>
           </div>

@@ -362,7 +362,7 @@ const handleBookingSubmit = async (e) => {
                 <div>
                   <div className="relative w-full h-48 bg-neutral-800 overflow-hidden">
                     <img
-                      src="https://images.pexels.com/photos/13861/IMG_3496.jpg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://www.shutterstock.com/image-photo/car-service-checking-concept-hand-600nw-2465864641.jpg"
                       alt="Engine Diagnostics"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -392,7 +392,7 @@ const handleBookingSubmit = async (e) => {
                 <div>
                   <div className="relative w-full h-48 bg-neutral-800 overflow-hidden">
                     <img
-                      src="https://images.pexels.com/photos/6873833/pexels-photo-6873833.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="https://zippycupautodetail.com/wp-content/uploads/2026/01/Why-Interior-Steam-Cleaning-Is-a-Better-Option-for-Your-Car-vs.-Basic-Shampoo-scaled.jpg"
                       alt="Interior Steam Spa"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />

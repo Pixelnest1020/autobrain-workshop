@@ -40,19 +40,22 @@ export default function CarPngCanvas({ mainContainerRef }) {
   }, [mainContainerRef]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
-      <div className="absolute w-[550px] h-[550px] bg-gradient-to-tr from-[#1D2B96]/30 to-[#E52321]/30 rounded-full blur-3xl opacity-60 pointer-events-none" />
-      <div ref={carWrapperRef} className="relative w-[300px] sm:w-[450px] md:w-[600px] lg:w-[750px] transition-transform duration-75">
-        <Image
-          ref={carImageRef}
-          src="/images/hcar.png"
-          alt="AutoBrain Car Care"
-          width={1000}
-          height={600}
-          priority
-          className="w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]"
+  /* Keep fixed flex container active on ALL screens */
+  <div className="fixed inset-0 pointer-events-none z-10 flex items-center justify-end pr-2 sm:pr-6 md:pr-12 lg:pr-24">
+    
+    {/* Scaled-down container: Made smaller on mobile (max-w-[220px]) so text remains readable */}
+    <div className="w-[50vw] max-w-[200px] xs:max-w-[240px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[650px] h-auto flex justify-center items-center">
+
+      {/* GSAP scroll ref */}
+      <div ref={carWrapperRef} className="w-full flex justify-center items-center">
+        <img 
+          src="/images/hcar.png" 
+          alt="AutoBrain Car" 
+          className="w-full h-auto object-contain opacity-90 sm:opacity-100"
         />
       </div>
+
     </div>
-  );
+  </div>
+);
 }

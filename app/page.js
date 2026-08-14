@@ -19,6 +19,9 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
 
+  // ADD THIS NEW STATE FOR MOBILE MENU:
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // State for Full-Screen Gallery Image Modal
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -107,77 +110,151 @@ const handleBookingSubmit = async (e) => {
       <CarPngCanvas mainContainerRef={mainContainerRef} />
 
       {/* NAVIGATION BAR */}
-      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-12 py-4 backdrop-blur-md bg-neutral-950/70 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="relative w-36 h-10 md:w-44 md:h-12 bg-white rounded-xl p-1 flex items-center justify-center shadow-lg">
-            <Image
-              src="/images/hlogo.png"
-              alt="AutoBrain Car Care Logo"
-              fill
-              className="object-contain p-1"
-              priority
-            />
-          </div>
-        </div>
+<nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800">
+  <div className="flex items-center justify-between max-w-7xl mx-auto px-4 py-2.5">
+    
+    {/* Logo Wrapper */}
+    <div className="relative w-28 h-8 sm:w-36 sm:h-10 md:w-44 md:h-12 bg-white rounded-xl p-1 flex items-center justify-center shrink-0">
+      <Image
+        src="/images/hlogo.png"
+        alt="AutoBrain Car Care Logo"
+        fill
+        className="object-contain p-1"
+        priority
+      />
+    </div>
 
-        <div className="hidden lg:flex items-center gap-8 text-sm font-semibold tracking-wide text-neutral-300">
-          <a href="#about" className="hover:text-red-500 transition-colors">About Us</a>
-          <a href="#services" className="hover:text-red-500 transition-colors">A-Z Services</a>
-          <a href="#gallery" className="hover:text-red-500 transition-colors">Gallery</a>
-          <a href="#detailing" className="hover:text-red-500 transition-colors">Detailing & Polish</a>
-          <a href="#claims" className="hover:text-red-500 transition-colors">Insurance Claims</a>
-          <a href="#buysell" className="hover:text-red-500 transition-colors">Buy & Sell</a>
-          <a href="#faq" className="hover:text-red-500 transition-colors">FAQs</a>
-        </div>
+    {/* Desktop Navigation Links (Hidden on Mobile) */}
+    <div className="hidden lg:flex items-center gap-7 text-sm font-semibold tracking-wide text-neutral-200">
+      <a href="#about" className="hover:text-red-500 transition-colors">About Us</a>
+      <a href="#services" className="hover:text-red-500 transition-colors">A-Z Services</a>
+      <a href="#gallery" className="hover:text-red-500 transition-colors">Gallery</a>
+      <a href="#detailing" className="hover:text-red-500 transition-colors">Detailing & Polish</a>
+      <a href="#claims" className="hover:text-red-500 transition-colors">Insurance Claims</a>
+      <a href="#buysell" className="hover:text-red-500 transition-colors">Buy & Sell</a>
+      <a href="#faqs" className="hover:text-red-500 transition-colors">FAQs</a>
+    </div>
 
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 bg-[#E52321] hover:bg-red-700 text-white font-bold text-sm px-5 py-2.5 rounded-full transition shadow-lg shadow-red-600/30 cursor-pointer"
-        >
-          <Calendar size={16} /> Book Visit
-        </button>
-      </nav>
+    {/* Right Controls: Desktop Book Button + Mobile MENU Toggle */}
+    <div className="flex items-center gap-2 sm:gap-3">
+      <button 
+        onClick={() => setIsModalOpen(true)}
+        className="hidden sm:flex px-4 py-2 bg-[#E52321] hover:bg-red-700 text-white text-xs sm:text-sm font-bold rounded-full items-center gap-1.5 shadow-md transition"
+      >
+        <Calendar size={14} />
+        <span>Book Visit</span>
+      </button>
 
+      {/* Modern Pill Toggle Button for Mobile (No 3-lines, No X) */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="lg:hidden flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-700 bg-neutral-900 text-xs font-bold tracking-wider text-white hover:border-[#E52321] transition"
+      >
+        <span className={`h-2 w-2 rounded-full ${isMenuOpen ? 'bg-red-500' : 'bg-emerald-500'}`} />
+        <span>{isMenuOpen ? "CLOSE" : "MENU"}</span>
+      </button>
+    </div>
+
+  </div>
+
+  {/* Mobile Vertical Dropdown List */}
+  {isMenuOpen && (
+    <div className="lg:hidden bg-neutral-900 border-t border-neutral-800 text-white w-full flex flex-col uppercase font-semibold text-xs sm:text-sm tracking-wider divide-y divide-neutral-800">
+      <a href="#about" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">About Us</a>
+      <a href="#services" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">A-Z Services</a>
+      <a href="#gallery" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">Gallery</a>
+      <a href="#detailing" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">Detailing & Polish</a>
+      <a href="#claims" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">Insurance Claims</a>
+      <a href="#buysell" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">Buy & Sell</a>
+      <a href="#faqs" onClick={() => setIsMenuOpen(false)} className="px-6 py-3.5 text-center hover:bg-neutral-800 transition">FAQs</a>
+    </div>
+  )}
+</nav>
+
+{/* RIGHT-SIDE STICKY FLOATING ACTION BAR */}
+<div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col shadow-2xl rounded-l-xl overflow-hidden">
+  
+  {/* Vertical "Contact Us" Tab */}
+  <button 
+    onClick={() => setIsModalOpen(true)}
+    className="bg-[#E52321] hover:bg-red-700 text-white py-4 px-2.5 flex items-center justify-center transition-colors cursor-pointer"
+    style={{ writingMode: "vertical-rl" }}
+  >
+    <span className="rotate-180 font-bold text-xs tracking-wider uppercase">
+      Contact Us
+    </span>
+  </button>
+
+  {/* Phone Call Shortcut */}
+  <a 
+    href="tel:+918905602022" 
+    className="bg-neutral-800 hover:bg-neutral-700 text-white p-3 flex items-center justify-center border-t border-neutral-700 transition-colors"
+    title="Call Us"
+  >
+    <Phone size={16} />
+  </a>
+
+  {/* WhatsApp Shortcut */}
+  <a 
+    href="https://wa.me/8905602022" 
+    target="_blank" 
+    rel="noreferrer" 
+    className="bg-emerald-600 hover:bg-emerald-500 text-white p-3 flex items-center justify-center border-t border-emerald-500 transition-colors"
+    title="WhatsApp Us"
+  >
+    <MessageSquare size={16} />
+  </a>
+
+</div>
       {/* PAGE CONTENT CONTAINER */}
       <div className="relative z-10">
 
         {/* SECTION 1: HERO */}
-        <section className="min-h-screen flex items-center px-6 md:px-20 pt-24">
-          <div className="max-w-2xl bg-neutral-900/60 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold mb-6">
-              <Star size={14} className="fill-amber-400" /> 4.9★ Rated Multi-Brand Workshop on Google
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight uppercase">
-              Auto<span className="text-[#E52321]">Brain</span> <br />
-              <span className="text-2xl md:text-4xl text-neutral-300 font-semibold lowercase tracking-normal">
-                Car Care Division
-              </span>
-            </h1>
+        {/* Hero Main Wrapper - Centered, Clean Layout */}
+<section className="relative min-h-[85vh] w-full flex flex-col items-center justify-center text-center px-4 pt-28 pb-12 max-w-4xl mx-auto z-20">
+  
+  {/* Rating Badge */}
+  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-6">
+    <Star size={14} className="fill-amber-400 text-amber-400" />
+    <span className="text-xs md:text-sm text-neutral-200 font-medium">
+      4.9★ Rated Multi-Brand Workshop on Google
+    </span>
+  </div>
 
-            <p className="mt-4 text-neutral-300 text-base md:text-lg leading-relaxed">
-              Your complete 360° multi-brand automotive destination. Premium denting, computerized painting, deep steam detailing, cashless insurance claims, and pre-owned buy/sell solutions.
-            </p>
+  {/* Main Heading */}
+  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight uppercase text-white mb-2">
+    Auto<span className="text-[#E52321]">Brain</span>
+  </h1>
 
-            <div className="mt-8 flex flex-wrap gap-4">
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="px-7 py-3.5 bg-[#E52321] hover:bg-red-700 text-white font-bold rounded-full transition flex items-center gap-2 shadow-lg shadow-red-600/30 cursor-pointer"
-              >
-                Book Appointment <ArrowRight size={18} />
-              </button>
-              <a 
-                href="https://wa.me/8905602022" 
-                target="_blank" 
-                rel="noreferrer"
-                className="px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 font-bold rounded-full border border-white/10 transition flex items-center gap-2 text-white"
-              >
-                <MessageSquare size={18} /> WhatsApp Workshop
-              </a>
-            </div>
-          </div>
-        </section>
+  {/* Subtitle */}
+  <span className="block text-xl md:text-3xl text-neutral-300 font-semibold lowercase tracking-normal mb-4">
+    Car Care Division
+  </span>
 
+  {/* Action Buttons */}
+  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+    
+    {/* Book Appointment Button */}
+    <button
+      onClick={() => setIsModalOpen(true)}
+      className="w-full sm:w-auto px-7 py-3.5 bg-[#E52321] hover:bg-red-700 text-white font-bold rounded-full transition flex items-center justify-center gap-2 shadow-lg shadow-red-600/20 cursor-pointer"
+    >
+      Book Appointment <ArrowRight size={18} />
+    </button>
+
+    {/* WhatsApp Button */}
+    <a
+      href="https://wa.me/8905602022"
+      target="_blank"
+      rel="noreferrer"
+      className="w-full sm:w-auto px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full border border-white/10 transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 cursor-pointer"
+    >
+      <MessageSquare size={18} /> WhatsApp Workshop
+    </a>
+
+  </div>
+
+</section>
         {/* STATS BAR */}
         <section className="px-6 md:px-20 py-10 relative z-20">
           <div className="max-w-6xl mx-auto bg-neutral-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center shadow-2xl">

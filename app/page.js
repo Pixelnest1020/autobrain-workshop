@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -18,6 +18,9 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
+
+  // State for Live Offer Center Modal
+  const [showOfferModal, setShowOfferModal] = useState(true);
 
   // ADD THIS NEW STATE FOR MOBILE MENU:
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -119,6 +122,7 @@ const handleBookingSubmit = async (e) => {
         src="/images/hlogo.png"
         alt="AutoBrain Car Care Logo"
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-contain p-1"
         priority
       />
@@ -186,115 +190,136 @@ const handleBookingSubmit = async (e) => {
   </button>
 
   {/* Phone Call Shortcut */}
-  <a 
-    href="tel:+918905602022" 
-    className="bg-neutral-800 hover:bg-neutral-700 text-white p-3 flex items-center justify-center border-t border-neutral-700 transition-colors"
-    title="Call Us"
-  >
-    <Phone size={16} />
-  </a>
+<a 
+  href="tel:+919157443095"
+  className="bg-neutral-800 hover:bg-neutral-700 text-white p-3 flex items-center justify-center border-t border-neutral-700"
+  title="Call Us"
+>
+  <Phone size={16} />
+</a>
 
-  {/* WhatsApp Shortcut */}
-  <a 
-    href="https://wa.me/8905602022" 
-    target="_blank" 
-    rel="noreferrer" 
-    className="bg-emerald-600 hover:bg-emerald-500 text-white p-3 flex items-center justify-center border-t border-emerald-500 transition-colors"
-    title="WhatsApp Us"
-  >
-    <MessageSquare size={16} />
-  </a>
+{/* WhatsApp Shortcut */}
+<a 
+  href="https://wa.me/918905602022"
+  target="_blank"
+  rel="noreferrer"
+  className="bg-emerald-600 hover:bg-emerald-500 text-white p-3 flex items-center justify-center border-t border-emerald-500"
+  title="WhatsApp Us"
+>
+  <MessageSquare size={16} />
+</a>
 
 </div>
       {/* PAGE CONTENT CONTAINER */}
       <div className="relative z-10">
 
         {/* SECTION 1: HERO */}
-        {/* Hero Main Wrapper - Centered, Clean Layout */}
-<section className="relative min-h-[85vh] w-full flex flex-col items-center justify-center text-center px-4 pt-28 pb-12 max-w-4xl mx-auto z-20">
+        {/* HERO SECTION - ELECTRIC BLUE EDITION */}
+<section className="relative min-h-[70vh] lg:min-h-[90vh] flex items-center pt-20 sm:pt-28 pb-8 sm:pb-16 overflow-hidden">
   
-  {/* Rating Badge */}
-  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 mb-6">
-    <Star size={14} className="fill-amber-400 text-amber-400" />
-    <span className="text-xs md:text-sm text-neutral-200 font-medium">
-      4.9★ Rated Multi-Brand Workshop on Google
-    </span>
-  </div>
+  {/* Background Blue Ambient Glow */}
+  <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
 
-  {/* Main Heading */}
-  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight uppercase text-white mb-2">
-    Auto<span className="text-[#E52321]">Brain</span>
-  </h1>
-
-  {/* Subtitle */}
-  <span className="block text-xl md:text-3xl text-neutral-300 font-semibold lowercase tracking-normal mb-4">
-    Car Care Division
-  </span>
-
-  {/* Action Buttons */}
-  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
     
-    {/* Book Appointment Button */}
-    <button
-      onClick={() => setIsModalOpen(true)}
-      className="w-full sm:w-auto px-7 py-3.5 bg-[#E52321] hover:bg-red-700 text-white font-bold rounded-full transition flex items-center justify-center gap-2 shadow-lg shadow-red-600/20 cursor-pointer"
-    >
-      Book Appointment <ArrowRight size={18} />
-    </button>
+    {/* LEFT COLUMN: Text Content */}
+    <div className="lg:col-span-7 flex flex-col items-start text-left gap-6 z-10">
+      
+      {/* Badge */}
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-700/80 text-xs sm:text-sm font-medium text-neutral-200 shadow-lg backdrop-blur-md">
+        <Star size={14} className="text-yellow-400 fill-yellow-400" />
+        <span>4.9★ Rated Multi-Brand Workshop on Google</span>
+      </div>
 
-    {/* WhatsApp Button */}
-    <a
-      href="https://wa.me/8905602022"
-      target="_blank"
-      rel="noreferrer"
-      className="w-full sm:w-auto px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full border border-white/10 transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 cursor-pointer"
-    >
-      <MessageSquare size={18} /> WhatsApp Workshop
-    </a>
+      {/* Hero Headline */}
+      <div className="space-y-2">
+        <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-none">
+          Auto<span className="text-blue-500 drop-shadow-[0_0_25px_rgba(59,130,246,0.4)]">Brain</span>
+        </h1>
+        <p className="text-xl sm:text-3xl font-extrabold tracking-wider text-neutral-300 capitalize">
+          Multi-brand Car Workshop
+        </p>
+      </div>
+
+      {/* Supporting Description */}
+      <p className="text-neutral-400 text-sm sm:text-base max-w-lg leading-relaxed">
+        Surat's premier multi-brand workshop. From high-end computerized denting & painting to graphene detailing and smooth cashless insurance claims.
+      </p>
+
+      {/* CTA Buttons */}
+      <div className="flex flex-wrap items-center gap-4 pt-2">
+        {/* Book Appointment Button */}
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full flex items-center gap-2.5 shadow-[0_4px_20px_rgba(37,99,235,0.4)] hover:shadow-[0_4px_25px_rgba(37,99,235,0.6)] transition-all text-sm sm:text-base cursor-pointer transform hover:-translate-y-0.5"
+        >
+          <span>Book Appointment</span>
+          <ArrowRight size={18} />
+        </button>
+
+        {/* WhatsApp Workshop Button */}
+        <a
+          href="https://wa.me/8905602022"
+          target="_blank"
+          rel="noreferrer"
+          className="px-6 py-3.5 bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700 text-white font-semibold rounded-full flex items-center gap-2.5 transition-all text-sm sm:text-base backdrop-blur-md"
+        >
+          <MessageSquare size={18} className="text-emerald-400" />
+          <span>WhatsApp Workshop</span>
+        </a>
+      </div>
+
+      {/* Key Feature Highlights */}
+      <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-neutral-800/80 w-full max-w-lg text-xs text-neutral-400 font-medium">
+        <div className="flex items-center gap-2">
+          <ShieldCheck size={16} className="text-blue-400" />
+          <span>Cashless Claims</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Wrench size={16} className="text-blue-400" />
+          <span>Multi-Brand Expert</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Sparkles size={16} className="text-blue-400" />
+          <span>Ceramic & PPF</span>
+        </div>
+      </div>
+
+    </div>
+
+    {/* RIGHT COLUMN: Car Canvas Spacer */}
+    <div className="lg:col-span-5 relative w-full h-[180px] xs:h-[220px] sm:h-[350px] lg:h-[500px] flex items-center justify-center -my-4 sm:my-0">
+      {/* 3D Car Canvas */}
+    </div>
 
   </div>
-
 </section>
-        {/* STATS BAR */}
-        <section className="px-6 md:px-20 py-10 relative z-20">
-          <div className="max-w-6xl mx-auto bg-neutral-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center shadow-2xl">
-            <div className="space-y-1">
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                30K<span className="text-[#E52321]">+</span>
-              </h3>
-              <p className="text-xs md:text-sm font-medium text-neutral-400 uppercase tracking-wider">
-                Happy Customers
-              </p>
-            </div>
+        {/* STATS BANNER */}
+<div className="w-full max-w-7xl mx-auto px-4 mt-0 sm:-mt-10 relative z-20">
+  <div className="bg-neutral-900/80 backdrop-blur-xl border border-neutral-800 rounded-3xl p-6 sm:p-8 shadow-2xl grid grid-cols-2 md:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x divide-neutral-800">
+    
+    {/* 30K+ Happy Customers - Pink/Red + */}
+    <div className="pt-4 md:pt-0 md:px-4">
+      <StatItem target={30} suffix="K+" label="Happy Customers" suffixColor="text-[#E52321]" />
+    </div>
 
-            <div className="space-y-1 border-l border-white/10 pl-4 md:pl-0 md:border-l-0">
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                20<span className="text-[#1D2B96]">+</span>
-              </h3>
-              <p className="text-xs md:text-sm font-medium text-neutral-400 uppercase tracking-wider">
-                Years Experience
-              </p>
-            </div>
+    {/* 20+ Years Experience - Cyan/Blue + */}
+    <div className="pt-4 md:pt-0 md:px-4">
+      <StatItem target={20} suffix="+" label="Years Experience" suffixColor="text-sky-400" />
+    </div>
 
-            <div className="space-y-1 border-t border-white/10 pt-4 md:pt-0 md:border-t-0 md:border-l md:border-white/10">
-              <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-                15K<span className="text-[#E52321]">+</span>
-              </h3>
-              <p className="text-xs md:text-sm font-medium text-neutral-400 uppercase tracking-wider">
-                Premium Cars Serviced
-              </p>
-            </div>
+    {/* 15K+ Premium Cars Serviced - Red/Pink + */}
+    <div className="pt-4 md:pt-0 md:px-4">
+      <StatItem target={15} suffix="K+" label="Premium Cars Serviced" suffixColor="text-red-400" />
+    </div>
 
-            <div className="space-y-1 border-t border-l border-white/10 pt-4 md:pt-0 md:border-t-0">
-              <h3 className="text-3xl md:text-5xl font-black text-amber-400 tracking-tight flex items-center justify-center gap-1">
-                4.9<span className="text-2xl md:text-3xl">★</span>
-              </h3>
-              <p className="text-xs md:text-sm font-medium text-neutral-400 uppercase tracking-wider">
-                Google Rating (500+ Reviews)
-              </p>
-            </div>
-          </div>
-        </section>
+    {/* 4.9★ Google Rating - Yellow ★ */}
+    <div className="pt-4 md:pt-0 md:px-4">
+      <StatItem target={4.9} decimals={1} suffix="★" label="Google Rating (500+ Reviews)" suffixColor="text-amber-400" />
+    </div>
+
+  </div>
+</div>
 
         {/* ABOUT US SECTION */}
         <section id="about" className="min-h-screen flex items-center justify-start px-6 md:px-20 py-20">
@@ -1086,6 +1111,123 @@ const handleBookingSubmit = async (e) => {
           </div>
         )}
       </AnimatePresence>
+
+      {/* CENTER FLOATING LIVE OFFER MODAL */}
+<AnimatePresence>
+  {showOfferModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+      
+      {/* Animated Modal Window */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.85, y: 20 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="relative w-full max-w-md bg-neutral-950 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-white text-center overflow-hidden"
+      >
+        {/* Background Ambient Glow */}
+        <div className="absolute -top-16 -left-16 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Custom Circular Close Button */}
+        <button
+          onClick={() => setShowOfferModal(false)}
+          className="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-900 border border-neutral-800 hover:border-emerald-500 p-2 rounded-full transition-all cursor-pointer z-10"
+          aria-label="Close offer"
+        >
+          <X size={18} />
+        </button>
+
+        {/* Offer Header Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-bold uppercase tracking-widest text-emerald-400 mb-4">
+          <Sparkles size={14} className="animate-pulse text-emerald-400" />
+          <span>Exclusive Website Offer</span>
+        </div>
+
+        {/* Main Discount Headline */}
+        <h3 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white mb-2">
+          FLAT <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">₹500 OFF</span>
+        </h3>
+
+        {/* Offer Condition */}
+        <p className="text-sm sm:text-base font-semibold text-neutral-200 mb-4">
+          On any car service above <span className="text-white underline decoration-emerald-400 font-bold">₹1500</span>
+        </p>
+
+        {/* Valid Till Highlight Box */}
+        <div className="bg-neutral-900/90 border border-neutral-800 rounded-2xl p-3 flex items-center justify-center gap-2 text-xs sm:text-sm text-neutral-300 mb-6">
+          <Clock size={16} className="text-emerald-400" />
+          <span>Valid Till: <strong className="text-white font-bold">End of This Month</strong></span>
+        </div>
+
+        {/* Action Button: Opens Google Maps Directly */}
+        <div className="flex flex-col gap-3">
+          <a
+            href="https://share.google/SEy7zdOCOe9db28aJ" 
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setShowOfferModal(false)}
+            className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-neutral-950 font-black rounded-full flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(16,185,129,0.35)] transition-all text-sm uppercase tracking-wider cursor-pointer"
+          >
+            <MapPin size={18} />
+            <span>Visit Now (Open Location)</span>
+          </a>
+        </div>
+
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
+
     </main>
+  );
+}
+
+// Animated Counter Helper Component
+function StatItem({ target, suffix = "+", decimals = 0, label, suffixColor = "text-white" }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000;
+          const steps = 60;
+          const stepTime = duration / steps;
+          const increment = target / steps;
+
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+              setCount(target);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, stepTime);
+
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [target]);
+
+  return (
+    <div ref={ref} className="text-center sm:text-left">
+      <div className="text-3xl sm:text-5xl font-extrabold text-white flex items-center justify-center sm:justify-start gap-0.5">
+        <span>{decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}</span>
+        <span className={suffixColor}>{suffix}</span>
+      </div>
+      <p className="text-xs sm:text-sm font-semibold tracking-wider text-neutral-400 uppercase mt-1">
+        {label}
+      </p>
+    </div>
   );
 }

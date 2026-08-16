@@ -1,3 +1,4 @@
+import { Icon, icons } from "lucide-react";
 import "./globals.css";
 
 export const metadata = {

@@ -9,6 +9,14 @@ import {
   Phone, CheckCircle2, ChevronDown, X, MessageSquare, MapPin, Clock, User, ZoomIn
 } from 'lucide-react';
 
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'], 
+  weight: ['600', '700'],
+  style: ['italic']
+});
+
 const CarPngCanvas = dynamic(() => import('@/components/CarPngCanvas'), { ssr: false });
 
 export default function Home() {
@@ -40,7 +48,7 @@ const handleBookingSubmit = async (e) => {
   e.preventDefault();
   setIsSubmitting(true);
 
-  // FormData automatically reads <input type="hidden" name="access_key" value="..." /> from your form!
+  // FormData automatically reads all hidden inputs including 'cc'
   const formData = new FormData(e.target);
 
   try {
@@ -50,6 +58,7 @@ const handleBookingSubmit = async (e) => {
     });
 
     const data = await response.json();
+    console.log("Web3Forms Response:", data);
 
     if (data.success) {
       setBookingSubmitted(true);
@@ -61,7 +70,7 @@ const handleBookingSubmit = async (e) => {
       alert("Web3Forms Error: " + data.message);
     }
   } catch (error) {
-    alert("Network error: " + error.message);
+    alert("Submission failed. Please try again.");
   } finally {
     setIsSubmitting(false);
   }
@@ -231,15 +240,21 @@ const handleBookingSubmit = async (e) => {
         <span>4.9★ Rated Multi-Brand Workshop on Google</span>
       </div>
 
-      {/* Hero Headline */}
-      <div className="space-y-2">
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-none">
-          Auto<span className="text-blue-500 drop-shadow-[0_0_25px_rgba(59,130,246,0.4)]">Brain</span>
-        </h1>
-        <p className="text-xl sm:text-3xl font-extrabold tracking-wider text-neutral-300 capitalize">
-          Multi-brand Car Workshop
-        </p>
-      </div>
+{/* Hero Headline */}
+<div className="relative inline-block">
+  {/* Cyan Background Ambient Glow */}
+  <div className="absolute -inset-4 bg-cyan-400/35 blur-3xl rounded-full pointer-events-none"></div>
+
+  {/* Italic, Medium-Bold White Title */}
+  <h1 className={`${montserrat.className} relative text-5xl sm:text-7xl md:text-8xl font-semibold italic tracking-wide uppercase mb-1 text-white`}>
+    AUTOBRAIN
+  </h1>
+</div>
+
+<p className={`${montserrat.className} text-lg sm:text-xl md:text-2xl font-semibold italic tracking-wider text-cyan-400 uppercase mt-1`}>
+  Multi-Brand Car Workshop
+</p>
+      
 
       {/* Supporting Description */}
       <p className="text-neutral-400 text-sm sm:text-base max-w-lg leading-relaxed">
@@ -1049,6 +1064,7 @@ const handleBookingSubmit = async (e) => {
 
                   <form onSubmit={handleBookingSubmit} className="space-y-4">
                     <input type="hidden" name="access_key" value="27a8b2e1-5c1a-403a-8c54-c83a7be83a03" />
+
                     <div>
                       <label className="block text-xs font-semibold text-neutral-300 mb-1">Your Name</label>
                       <input 

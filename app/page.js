@@ -28,7 +28,7 @@ export default function Home() {
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
 
   // State for Live Offer Center Modal
-  const [showOfferModal, setShowOfferModal] = useState(true);
+  const [showOfferModal, setShowOfferModal] = useState(false);
 
   // ADD THIS NEW STATE FOR MOBILE MENU:
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -218,6 +218,27 @@ const handleBookingSubmit = async (e) => {
   <MessageSquare size={16} />
 </a>
 
+{/* Live Offers Shortcut */}
+        <button
+          onClick={() => setShowOfferModal(true)}
+          className="relative bg-gradient-to-b from-amber-500 via-orange-600 to-red-600 text-white py-5 px-3 flex items-center justify-center border-t border-amber-300 transition-all cursor-pointer shadow-[0_0_20px_rgba(249,115,22,0.6)] hover:brightness-125 group overflow-hidden"
+          style={{ writingMode: "vertical-rl" }}
+          title="Live Offers"
+        >
+          {/* Pulsing Attention Badge */}
+          <span className="absolute top-2 left-1/2 -translate-x-1/2 flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-90"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-400"></span>
+          </span>
+
+          <span className="rotate-180 text-xs tracking-widest uppercase flex items-center gap-1.5 font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] mt-3">
+            <span className="animate-bounce inline-block text-base">🔥</span>
+            <span className="text-yellow-300 font-black tracking-wider">
+              LIVE OFFERS
+            </span>
+          </span>
+        </button>
+
 </div>
       {/* PAGE CONTENT CONTAINER */}
       <div className="relative z-10">
@@ -274,7 +295,7 @@ const handleBookingSubmit = async (e) => {
 
         {/* WhatsApp Workshop Button */}
         <a
-          href="https://wa.me/8905602022"
+          href="https://wa.me/918905602022"
           target="_blank"
           rel="noreferrer"
           className="px-6 py-3.5 bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-700 text-white font-semibold rounded-full flex items-center gap-2.5 transition-all text-sm sm:text-base backdrop-blur-md"
@@ -1128,18 +1149,17 @@ const handleBookingSubmit = async (e) => {
         )}
       </AnimatePresence>
 
-      {/* CENTER FLOATING LIVE OFFER MODAL */}
-<AnimatePresence>
+      <AnimatePresence>
+  {/* CENTER FLOATING LIVE OFFER MODAL */}
   {showOfferModal && (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      
       {/* Animated Modal Window */}
       <motion.div
         initial={{ opacity: 0, scale: 0.85, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.85, y: 20 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative w-full max-w-md bg-neutral-950 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-white text-center overflow-hidden"
+        className="relative w-full max-w-md bg-neutral-950 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(16,185,129,0.2)]"
       >
         {/* Background Ambient Glow */}
         <div className="absolute -top-16 -left-16 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
@@ -1148,48 +1168,57 @@ const handleBookingSubmit = async (e) => {
         {/* Custom Circular Close Button */}
         <button
           onClick={() => setShowOfferModal(false)}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-900 border border-neutral-800 hover:border-emerald-500 p-2 rounded-full transition-all cursor-pointer z-10"
+          className="absolute top-4 right-4 text-neutral-400 hover:text-white bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-full p-2 transition-all"
           aria-label="Close offer"
         >
           <X size={18} />
         </button>
 
-        {/* Offer Header Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs font-bold uppercase tracking-widest text-emerald-400 mb-4">
-          <Sparkles size={14} className="animate-pulse text-emerald-400" />
-          <span>Exclusive Website Offer</span>
+        {/* Header Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold mb-4">
+          <Sparkles size={14} className="animate-pulse" />
+          <span>🔥 Active Workshop Offers</span>
         </div>
 
-        {/* Main Discount Headline */}
-        <h3 className="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white mb-2">
-          FLAT <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">₹500 OFF</span>
+        <h3 className="text-2xl font-bold text-white mb-4">
+          Exclusive Deals & Discounts
         </h3>
 
-        {/* Offer Condition */}
-        <p className="text-sm sm:text-base font-semibold text-neutral-200 mb-4">
-          On any car service above <span className="text-white underline decoration-emerald-400 font-bold">₹1500</span>
-        </p>
+        {/* Offers List Container */}
+        <div className="space-y-3 max-h-[55vh] overflow-y-auto pr-1">
+          {/* Offer 1 */}
+          <div className="p-4 rounded-2xl bg-neutral-900/80 border border-emerald-500/30 hover:border-emerald-500/60 transition-all">
+            <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">
+              Popular
+            </span>
+            <h4 className="text-base font-bold text-white mt-1">
+              Full Car Service Package
+            </h4>
+            <p className="text-xs text-neutral-400 mt-1">
+              Flat 20% OFF on complete engine inspection & oil service.
+            </p>
+          </div>
 
-        {/* Valid Till Highlight Box */}
-        <div className="bg-neutral-900/90 border border-neutral-800 rounded-2xl p-3 flex items-center justify-center gap-2 text-xs sm:text-sm text-neutral-300 mb-6">
-          <Clock size={16} className="text-emerald-400" />
-          <span>Valid Till: <strong className="text-white font-bold">End of This Month</strong></span>
+          {/* Offer 2 */}
+          <div className="p-4 rounded-2xl bg-neutral-900/80 border border-neutral-800 hover:border-neutral-700 transition-all">
+            <h4 className="text-base font-bold text-white">
+              Free AC Checkup
+            </h4>
+            <p className="text-xs text-neutral-400 mt-1">
+              Complimentary air conditioning performance diagnostic.
+            </p>
+          </div>
+
+          {/* Offer 3 */}
+          <div className="p-4 rounded-2xl bg-neutral-900/80 border border-neutral-800 hover:border-neutral-700 transition-all">
+            <h4 className="text-base font-bold text-white">
+              Wheel Alignment Discount
+            </h4>
+            <p className="text-xs text-neutral-400 mt-1">
+              Flat ₹300 OFF on 3D laser alignment and balancing.
+            </p>
+          </div>
         </div>
-
-        {/* Action Button: Opens Google Maps Directly */}
-        <div className="flex flex-col gap-3">
-          <a
-            href="https://share.google/SEy7zdOCOe9db28aJ" 
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setShowOfferModal(false)}
-            className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-neutral-950 font-black rounded-full flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(16,185,129,0.35)] transition-all text-sm uppercase tracking-wider cursor-pointer"
-          >
-            <MapPin size={18} />
-            <span>Visit Now (Open Location)</span>
-          </a>
-        </div>
-
       </motion.div>
     </div>
   )}
